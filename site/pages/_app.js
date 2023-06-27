@@ -54,7 +54,7 @@ export default function App({ Component, pageProps }) {
     if(listBan?.includes(ip)){
       router.push('/ban')
     }
-  }, [listBan,ip,router]);
+  }, [listBan,ip]);
 
   useEffect(() => {
     const handleStart = () => {
