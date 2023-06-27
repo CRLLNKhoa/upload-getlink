@@ -11,7 +11,50 @@ import Script from 'next/script';
 
 export default function App({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [ip, setip] = useState("")
+  const [listBan, setlistBan] = useState([])
   const router = useRouter();
+
+  useEffect(() => {
+    fetch(`https://api.country.is/`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setip(data.ip)
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/ban`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 400) {
+          return toast.error("Kết nối server thất bại!");
+        }
+        setlistBan(data.list);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  useEffect(() => {
+    if(listBan?.includes(ip)){
+      router.push('/ban')
+    }
+  }, [listBan,ip,router]);
 
   useEffect(() => {
     const handleStart = () => {

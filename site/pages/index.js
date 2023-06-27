@@ -2,8 +2,16 @@ import Link from "next/link";
 import MyHead from "../components/MyHead";
 import FileUpload from "@/components/Fileupload";
 import Banner from "@/components/Banner";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Home() {
+  const router = useRouter()
+  useEffect(() => {
+    if (localStorage.getItem("UploadLinked")) {
+     router.push("/home")
+    }
+  }, []);
   return (
     <>
       <MyHead

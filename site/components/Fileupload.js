@@ -18,12 +18,29 @@ export default function FileUpload() {
   const [uploader, setuploader] = useState("");
   const [keyword, setkeyword] = useState([]);
   const [isLoadingSave, setisLoadingSave] = useState(false);
+  const [ip, setip] = useState("")
 
   useEffect(() => {
     if (file) {
       setfilename(file.name);
     }
   }, [file]);
+
+  useEffect(() => {
+    fetch(`https://api.country.is/`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setip(data)
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   const handleInputFile = (e) => {
     let fileData = e.target.files[0];
@@ -85,6 +102,7 @@ export default function FileUpload() {
         title: title,
         uploader: uploader,
         keyword: keyword,
+        ip: ip?.ip
       }),
     })
       .then((res) => res.json())
