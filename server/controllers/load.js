@@ -1,10 +1,11 @@
+const Ban = require("../models/banModel");
 const Image = require("../models/imgModel");
 
 
 const loadImage = async (req,res) => {
     const limit = Number(req.query.limit) ||  20
     try {
-        const imgs = await Image.find().limit(limit)
+        const imgs = await Image.find().limit(limit).sort({createdAt: "desc"})
         const num = await Image.count()
         return res.json({
             status: 200,
@@ -95,6 +96,66 @@ const loadImageFilter = async (req,res) => {
     }
 }
 
+const loadBan = async (req,res) => {
+    try {
+        const ban = await Ban.find()
+        var result = ban.map(item => {
+            return item.ip
+          } )
+        return res.json({
+            status: 200,
+            message: "Thành công!",
+            list: result
+        })
+    } catch (error) {
+        return res.json({
+            status: 400,
+            message: "Không thành công!",
+        })
+    }
+}
+
+const addBan = async (req,res) => {
+    const ip = req.body.ip
+    try {
+        const ban = await Ban.create(
+            {
+                ip:  ip
+            }
+        )
+        return res.json({
+            status: 200,
+            message: "Thành công!",
+        })
+    } catch (error) {
+        return res.json({
+            status: 400,
+            message: "Không thành công!",
+        })
+    }
+}
+
+const delBan = async (req,res) => {
+    const ip = req.body.ip
+    try {
+        const ban = await Ban.deleteOne(
+            {
+                ip:  ip
+            }
+        )
+        return res.json({
+            status: 200,
+            message: "Thành công!",
+        })
+    } catch (error) {
+        return res.json({
+            status: 400,
+            message: "Không thành công!",
+        })
+    }
+}
+
+
 module.exports = {
-    loadImage,loadUploader,loadKeyword,loadImageFilter
+    loadImage,loadUploader,loadKeyword,loadImageFilter,loadBan,addBan,delBan
   };

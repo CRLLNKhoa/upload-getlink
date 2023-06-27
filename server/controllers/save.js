@@ -1,7 +1,7 @@
 const Image = require("../models/imgModel");
 
 const saveImage = async (req, res) => {
-  const { title, uploader, keyword, links } = req.body;
+  const { title, uploader, keyword, links,ip } = req.body;
   try {
     const defaultKeyword = []
     const handleKeyword = keyword.split(" ")
@@ -17,6 +17,7 @@ const saveImage = async (req, res) => {
       uploader,
       links,
       keyword: defaultKeyword,
+      ip,
     });
     res.json({
       status: 200,

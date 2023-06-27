@@ -4,7 +4,9 @@ const cors = require("cors")
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const { saveImage } = require("./controllers/save");
-const { loadImage, loadUploader, loadKeyword, loadImageFilter } = require("./controllers/load");
+const { loadImage, loadUploader, loadKeyword, loadImageFilter, loadBan, addBan, delBan } = require("./controllers/load");
+const { delImages } = require("./controllers/delete");
+const { updateImages } = require("./controllers/update");
 
 mongoose.set("strictQuery",false);
 
@@ -24,6 +26,11 @@ app.get("/", (req,res) => {
 
 app.post("/api/save",saveImage)
 app.get("/api/load",loadImage)
+app.get("/api/ban",loadBan)
+app.post("/api/addban",addBan)
+app.delete("/api/delban",delBan)
+app.delete("/api/del/:id",delImages)
+app.put("/api/update/:id",updateImages)
 app.post("/api/load/filter",loadImageFilter)
 app.get("/api/load/uploader",loadUploader)
 app.get("/api/load/keyword",loadKeyword)

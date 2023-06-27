@@ -7,6 +7,7 @@ const Image = new Schema({
   keyword: [{ type: String}],
   status: { type: Boolean, default: true },
   links: { type: String },
+  ip: { type: String, default: "0.0.0.0" },
 },{
     timestamps: true
 });
