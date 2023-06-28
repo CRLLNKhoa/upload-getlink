@@ -59,11 +59,11 @@ const loadImageFilter = async (req,res) => {
     try {
         if(type === "uploader"){
             const total = await Image.find({
-                uploader: filter,
+                uploader: filter
             })
             const num =total.length
             const imgs = await Image.find({
-                uploader: filter,
+                uploader: filter,status: true
             }).limit(limit)
             return res.json({
                 status: 200,
@@ -78,7 +78,7 @@ const loadImageFilter = async (req,res) => {
             })
             const num =total.length
             const imgs = await Image.find({
-                keyword: filter,
+                keyword: filter,status: true
             }).limit(limit)
             return res.json({
                 status: 200,
