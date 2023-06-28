@@ -122,6 +122,65 @@ export default function Home() {
         url="https://upload-getlink-crllnkhoa.vercel.app/"
       />
       <main className="w-full min-h-screen flex flex-col items-center">
+        <div className="carousel w-full">
+          <div id="slide1" className="carousel-item relative w-full">
+            <img
+              src="https://fapxy.info/wp-content/uploads/2022/04/1650591567_106_200-anh-bia-dep-xin-xo-cho-Facebook-YouTube-Zalo.jpg"
+              className="w-full h-[340px]"
+            />
+            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide4" className="btn btn-circle">
+                ❮
+              </a>
+              <a href="#slide2" className="btn btn-circle">
+                ❯
+              </a>
+            </div>
+          </div>
+          <div id="slide2" className="carousel-item relative w-full">
+            <img
+              src="https://mgvinhhai.edu.vn/wp-content/uploads/Thuong-thuc-anh-bia-dep-de-thuong-nhat-lam-anh.jpg"
+              className="w-full h-[340px]"
+            />
+            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide1" className="btn btn-circle">
+                ❮
+              </a>
+              <a href="#slide3" className="btn btn-circle">
+                ❯
+              </a>
+            </div>
+          </div>
+          <div id="slide3" className="carousel-item relative w-full">
+            <img
+              src="https://bizweb.dktcdn.net/100/438/408/files/anh-bia-facebook-dep-yody-vn-1.jpg?v=1684576893424"
+              className="w-full h-[340px]"
+            />
+            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide2" className="btn btn-circle">
+                ❮
+              </a>
+              <a href="#slide4" className="btn btn-circle">
+                ❯
+              </a>
+            </div>
+          </div>
+          <div id="slide4" className="carousel-item relative w-full">
+            <img
+              src="https://addo.vn/wp-content/uploads/2021/10/anh-bia-anh-nen-facebook-dep-57-1024x379.jpg"
+              className="w-full h-[340px]"
+            />
+            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide3" className="btn btn-circle">
+                ❮
+              </a>
+              <a href="#slide1" className="btn btn-circle">
+                ❯
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div className="w-full items-center flex justify-end px-8 py-4">
           {check ? (
             <button
@@ -140,45 +199,21 @@ export default function Home() {
           )}
         </div>
         <div className="w-full grid grid-cols-4 gap-4 p-4">
-          <div className="flex col-span-4 pr-2 lg:col-span-1 flex-col border-r-2 mb-4 lg:mb-0 lg:min-h-screen">
-            <h1 className="font-bold">Keyword:</h1>
-            <div className="flex flex-wrap mt-2 gap-4">
-              {keyword?.map((item) => (
-                <Link
-                  key={item}
-                  className="border hover:bg-sky-600 hover:text-white hover:border-transparent duration-500 border-black px-4 rounded-lg"
-                  href={`/filter/keyword/${item}`}
-                >
-                  {item}
-                </Link>
-              ))}
-            </div>
-            <h1 className="font-bold mt-12">Người đăng:</h1>
-            <div className="flex flex-wrap mt-2 gap-4">
-              {uploader?.map((item) => (
-                <Link
-                  key={item}
-                  className="border hover:bg-sky-600 hover:text-white hover:border-transparent duration-500 border-black px-4 rounded-lg"
-                  href={`/filter/uploader/${item}`}
-                >
-                  {item}
-                </Link>
-              ))}
-            </div>
-          </div>
-          <div className="col-span-4 lg:col-span-3 flex flex-col">
+          <div className="col-span-4 lg:col-span-4 flex flex-col">
             <div className="flex flex-wrap gap-4 justify-start">
-              {data?.filter(obj => obj.status === true).map((item,index) => (
-                <div key={item._id} className="lg:w-[23%]">
-                  <CardImage
-                    index={index + 100}
-                    title={item.title}
-                    img={item.links}
-                    keyword={item.keyword}
-                    uploader={item.uploader}
-                  />
-                </div>
-              ))}
+              {data
+                ?.filter((obj) => obj.status === true)
+                .map((item, index) => (
+                  <div key={item._id} className="lg:w-[19%] w-full">
+                    <CardImage
+                      index={index + 100}
+                      title={item.title}
+                      img={item.links}
+                      keyword={item.keyword}
+                      uploader={item.uploader}
+                    />
+                  </div>
+                ))}
             </div>
             {totalImgs >= limit && (
               <div className="w-full flex justify-center my-12">
